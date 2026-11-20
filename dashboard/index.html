@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Launch Radar — pre-token protocols ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><span></span></div>
+      <div>
+        <h1>Token Launch Radar</h1>
+        <p class="tagline">Protocols that record no token yet, ranked by what a token would be worth if the record stayed as it is.</p>
+      </div>
+    </div>
+    <dl class="stats" id="stats"></dl>
+  </div>
+  <p class="method-line" id="method-line"></p>
+</header>
+<nav class="tabs" id="tabs" aria-label="Views">
+  <button type="button" data-tab="board" class="on">The board</button>
+  <button type="button" data-tab="live">Already launched</button>
+  <button type="button" data-tab="method">Method &amp; calibration</button>
+</nav>
+<main>
+  <section id="view-board">
+    <div class="toolbar" role="search">
+      <label class="field grow">Search
+        <input id="q" type="search" placeholder="Protocol name or slug" autocomplete="off">
+      </label>
+      <label class="field">Category
+        <select id="cat"></select>
+      </label>
+      <label class="field">Chain
+        <select id="chain"></select>
+      </label>
+      <label class="field">Sort by
+        <select id="sort">
+          <option value="implied">Implied value</option>
+          <option value="tvl">TVL</option>
+          <option value="growth">7d change</option>
+          <option value="age">Age</option>
+          <option value="multiple">Peer multiple</option>
+        </select>
+      </label>
+      <label class="check">
+        <input id="watch" type="checkbox"> Watchlist only
+      </label>
+      <p class="count" id="count" aria-live="polite"></p>
+    </div>
+    <div class="board-wrap">
+      <table class="board" id="board-table">
+        <thead>
+          <tr>
+            <th class="num">#</th><th>Protocol</th><th>Category</th><th>Chains</th>
+            <th class="num">TVL</th><th class="num">7d</th><th class="num">Age</th>
+            <th class="num">Peer &times;</th><th class="num">Implied value</th>
+          </tr>
+        </thead>
+        <tbody id="board-body"></tbody>
+      </table>
+      <aside class="detail" id="detail" aria-live="polite"></aside>
+    </div>
+  </section>
+  <section id="view-live" hidden>
+    <p class="lede">These protocols already trade. The board never ranks them; it learns from them. Each one's market cap to TVL ratio is a vote on what a launch in its category is worth, and the calibration table on the Method tab is built from exactly these rows.</p>
+    <table class="board" id="live-table">
+      <thead>
+        <tr><th>Protocol</th><th>Category</th><th>Chains</th><th class="num">TVL</th><th class="num">Market cap</th><th class="num">MCap / TVL</th><th class="num">7d</th></tr>
+      </thead>
+      <tbody id="live-body"></tbody>
+    </table>
+  </section>
+  <section id="view-method" hidden>
+    <div id="method-body"></div>
+  </section>
+</main>
+<footer>
+  <p>An implied value is this board's own claim, not a prediction: it says what a token would be worth if the protocol's record stayed exactly as the snapshot froze it. It does not say a token will be issued, or when. Data: the sealed DefiLlama snapshot named in the header; the page runs with no network and every figure on it is recomputed from that snapshot by the code beside it.</p>
+</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
